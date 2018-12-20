@@ -234,7 +234,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			// "RFC 3339, where generated output will always be Z-normalized
 			//  and uses 0, 3, 6 or 9 fractional digits."
 			s, ns := s.Field(0).Int(), s.Field(1).Int()
-			if ns < 0 || ns >= secondInNanos {
+			if ns >= secondInNanos {
 				return fmt.Errorf("ns out of range [0, %v)", secondInNanos)
 			}
 			t := time.Unix(s, ns).UTC()
